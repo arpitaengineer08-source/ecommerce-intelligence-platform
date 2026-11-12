@@ -1,0 +1,9 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    { "name": "Run pipeline", "type": "debugpy", "request": "launch", "program": "${workspaceFolder}/run_pipeline.py", "console": "integratedTerminal" },
+    { "name": "Streamlit app", "type": "debugpy", "request": "launch", "module": "streamlit",
+      "args": ["run", "app/streamlit_app.py"], "console": "integratedTerminal" },
+    { "name": "Run tests", "type": "debugpy", "request": "launch", "module": "pytest", "args": ["-v"], "console": "integratedTerminal" }
+  ]
+}

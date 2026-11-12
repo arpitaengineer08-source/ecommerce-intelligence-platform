@@ -1,0 +1,32 @@
+check,table,status,detail
+Primary key unique (customer_id),customers,PASS,0 duplicate keys
+Primary key unique (order_id),orders,PASS,0 duplicate keys
+Primary key unique (order_id+order_item_id),order_items,PASS,0 duplicate keys
+Primary key unique (order_id+payment_sequential),payments,PASS,0 duplicate keys
+Primary key unique (product_id),products,PASS,0 duplicate keys
+Primary key unique (seller_id),sellers,PASS,0 duplicate keys
+Primary key unique (review_id+order_id),reviews,PASS,0 duplicate keys
+Foreign key: orders.customer_id -> customers,orders,PASS,0 orphan rows
+Foreign key: order_items.order_id -> orders,order_items,PASS,0 orphan rows
+Foreign key: order_items.product_id -> products,order_items,PASS,0 orphan rows
+Foreign key: order_items.seller_id -> sellers,order_items,PASS,0 orphan rows
+Foreign key: payments.order_id -> orders,payments,PASS,0 orphan rows
+Foreign key: reviews.order_id -> orders,reviews,PASS,0 orphan rows
+No nulls in order_purchase_timestamp,orders,PASS,0 nulls
+No nulls in price,order_items,PASS,0 nulls
+No nulls in customer_unique_id,customers,PASS,0 nulls
+Products with known category,products,PASS,50 unknown (1.4%)
+Delivered orders have delivery date,orders,WARN,15 missing
+Carrier pickup not before purchase,orders,PASS,0 violations
+Review score within 1-5,reviews,PASS,range check
+Prices strictly positive,order_items,PASS,0 non-positive
+Payments reconcile with items + freight (+-R$1),payments,PASS,0.00% of orders mismatch
+Row-count drift vs last run (<20%),customers,PASS,"22,000 -> 22,000 (+0.0%)"
+Row-count drift vs last run (<20%),orders,PASS,"22,000 -> 22,000 (+0.0%)"
+Row-count drift vs last run (<20%),order_items,PASS,"25,470 -> 25,470 (+0.0%)"
+Row-count drift vs last run (<20%),payments,PASS,"23,075 -> 23,075 (+0.0%)"
+Row-count drift vs last run (<20%),reviews,PASS,"21,585 -> 21,585 (+0.0%)"
+Row-count drift vs last run (<20%),products,PASS,"3,500 -> 3,500 (+0.0%)"
+Row-count drift vs last run (<20%),sellers,PASS,600 -> 600 (+0.0%)
+Row-count drift vs last run (<20%),geolocation,PASS,"1,599 -> 1,599 (+0.0%)"
+Row-count drift vs last run (<20%),category_translation,PASS,22 -> 22 (+0.0%)

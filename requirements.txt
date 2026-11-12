@@ -1,0 +1,14 @@
+pandas>=2.1
+numpy>=1.26
+duckdb>=1.0
+sqlalchemy>=2.0
+psycopg2-binary>=2.9
+matplotlib>=3.8
+seaborn>=0.13
+plotly>=5.18
+scikit-learn>=1.4
+statsmodels>=0.14
+streamlit>=1.35
+pytest>=8.0
+# notebooks (optional)
+jupyter>=1.0

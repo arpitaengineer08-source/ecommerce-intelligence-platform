@@ -1,0 +1,18 @@
+# data & databases
+data/raw/*.csv
+data/raw/.synthetic
+data/*.duckdb
+data/*.duckdb.wal
+data/processed/quality_snapshot.json
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+.pytest_cache/
+# OS / editor
+.DS_Store
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json

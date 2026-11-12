@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-11-12T15:22:39",
+  "source": "synthetic",
+  "engine": "duckdb",
+  "orders": 21227,
+  "sql_queries": 43,
+  "advanced_sql_queries": 20,
+  "clv": {
+    "aov": 147.41662458190044,
+    "orders_per_customer": 1.0440192799527839,
+    "historical_clv": 153.90579824906555,
+    "repeat_rate_pct": 4.0232146370253785
+  },
+  "churn_model": {
+    "customers_in_sample": 14220,
+    "positive_rate_pct": 1.5119549929676512,
+    "roc_auc": 0.5407978672760163,
+    "avg_precision": 0.021979875265516507,
+    "baseline_precision": 0.015189873417721518,
+    "cutoff": "2018-05-03",
+    "window_days": 120
+  }
+}

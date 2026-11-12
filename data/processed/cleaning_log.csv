@@ -1,0 +1,22 @@
+table,issue,rows_affected,action
+customers,duplicate customer_id,0,dropped
+orders,duplicate order_id,0,dropped
+orders,unparseable order_purchase_timestamp,0,set to NULL
+orders,unparseable order_approved_at,0,set to NULL
+orders,unparseable order_delivered_carrier_date,0,set to NULL
+orders,unparseable order_delivered_customer_date,0,set to NULL
+orders,unparseable order_estimated_delivery_date,0,set to NULL
+orders,delivered before purchase (impossible),15,"delivery date set to NULL, order kept"
+orders,status=delivered but no delivery date,15,kept (excluded from delivery-time metrics)
+order_items,"duplicate (order_id, item_id)",0,dropped
+order_items,negative price/freight,0,dropped
+order_items,orphan order_id,0,dropped
+payments,"duplicate (order_id, sequential)",0,dropped
+payments,orphan order_id,0,dropped
+reviews,fully duplicated rows,60,dropped
+reviews,"duplicate (review_id, order_id)",0,dropped
+reviews,score outside 1-5,0,dropped
+reviews,orphan order_id,0,dropped
+products,duplicate product_id,0,dropped
+products,missing category,50,filled with 'unknown'
+geolocation,many rows per zip prefix,21,aggregated to 1 row per zip prefix

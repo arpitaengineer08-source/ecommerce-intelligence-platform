@@ -1,0 +1,2 @@
+customers_in_sample,positive_rate_pct,roc_auc,avg_precision,baseline_precision,cutoff,window_days
+14220,1.5119549929676512,0.5407978672760163,0.021979875265516507,0.015189873417721518,2018-05-03,120

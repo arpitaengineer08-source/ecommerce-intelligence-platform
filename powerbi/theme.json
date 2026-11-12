@@ -1,0 +1,95 @@
+{
+  "name": "Ecom Midnight Aurora",
+  "dataColors": [
+    "#7C5CFF",
+    "#22D3EE",
+    "#FFB547",
+    "#34E5A1",
+    "#FF5C8A",
+    "#B39DFF",
+    "#7BE0F2",
+    "#FFD28A"
+  ],
+  "background": "#0C0E1F",
+  "foreground": "#E9EBFF",
+  "tableAccent": "#7C5CFF",
+  "good": "#34E5A1",
+  "neutral": "#FFB547",
+  "bad": "#FF5C8A",
+  "maximum": "#7C5CFF",
+  "center": "#22D3EE",
+  "minimum": "#161A35",
+  "textClasses": {
+    "callout": {
+      "fontSize": 36,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#E9EBFF"
+    },
+    "title": {
+      "fontSize": 14,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#E9EBFF"
+    },
+    "header": {
+      "fontSize": 12,
+      "fontFace": "Segoe UI",
+      "color": "#9AA0CC"
+    },
+    "label": {
+      "fontSize": 10,
+      "fontFace": "Segoe UI",
+      "color": "#9AA0CC"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#161A35"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "color": {
+              "solid": {
+                "color": "#2A2F5C"
+              }
+            },
+            "radius": 12,
+            "show": true
+          }
+        ],
+        "title": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#E9EBFF"
+              }
+            },
+            "show": true
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#0C0E1F"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    }
+  }
+}
