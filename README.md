@@ -4,8 +4,9 @@ An end-to-end analytics platform for an online marketplace. It answers one quest
 
 > **What is happening in the business, why is it happening, and what should the company do next?**
 
-Python ETL → SQL warehouse (raw / staging / star schema) → 43 documented SQL queries → RFM, cohorts, forecasting, churn risk,
-scenarios → Streamlit dashboard + Power BI kit + automated reports.
+Python ETL → SQL warehouse (raw / staging / star schema) → 43 documented SQL queries → RFM, cohorts, forecasting, churn risk, scenarios → Streamlit dashboard + Power BI kit + automated reports.
+
+**🚀 [Live Dashboard](https://ecommerce-intelligence-platform02.streamlit.app/)** · **💻 [GitHub Repository](https://github.com/arpitaengineer08-source/ecommerce-intelligence-platform)**
 
 ![Executive overview](docs/screenshots/executive_overview.png)
 
@@ -24,13 +25,11 @@ python run_pipeline.py
 streamlit run app/streamlit_app.py
 ```
 
-The dashboard also builds the warehouse by itself on first launch if you skip step 2. Run the tests with `pytest`.
-The `.vscode/launch.json` file gives you one-click Run/Debug entries for the pipeline, the app and the tests.
+The dashboard also builds the warehouse by itself on first launch if you skip step 2. Run the tests with `pytest`. The `.vscode/launch.json` file gives you one-click Run/Debug entries for the pipeline, the app and the tests.
 
 ### Data: synthetic by default, real Olist in one command
-No Kaggle login is needed to run the project: `python/generate_sample_data.py` creates a dataset with the **exact Olist file and column names**
-(22,000 orders, realistic growth, Black Friday spike, regional delivery gaps, late-delivery → low-rating effect, plus deliberate data defects
-for the cleaning step to catch).
+
+No Kaggle login is needed to run the project: `python/generate_sample_data.py` creates a dataset with the **exact Olist file and column names** (22,000 orders, realistic growth, Black Friday spike, regional delivery gaps, late-delivery → low-rating effect, plus deliberate data defects for the cleaning step to catch).
 
 To use the real data, put the 9 CSVs from [Kaggle Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) in `data/raw/` and run:
 
@@ -38,8 +37,7 @@ To use the real data, put the 9 CSVs from [Kaggle Olist](https://www.kaggle.com/
 python run_pipeline.py --real
 ```
 
-Every number in the reports and dashboard then comes from real orders, and nothing else changes. **Findings from synthetic data are
-demonstrations, not real insights. Say so in your portfolio and re-run on the real dataset before quoting numbers.**
+Every number in the reports and dashboard then comes from real orders, and nothing else changes. **Findings from synthetic data are demonstrations, not real insights. Say so in your portfolio and re-run on the real dataset before quoting numbers.**
 
 ## What is inside
 
@@ -61,24 +59,22 @@ demonstrations, not real insights. Say so in your portfolio and re-run on the re
 
 ## Architecture
 
-```
+```text
 Olist CSVs ─► Python ETL ─► SQL warehouse ─► Analytics layer ─► Streamlit · Power BI · Reports
               ingest         raw                RFM · cohorts     decisions
               clean          staging            forecast · churn
               validate       analytics (star)   scenarios
 ```
 
-**Star schema:** `fact_orders` (1 row / order), `fact_order_items` (/ item), `fact_payments` (/ payment), `fact_reviews` (/ review),
-and `dim_customer`, `dim_product`, `dim_seller`, `dim_date`, `dim_geography`. The facts are kept at separate grains because joining payments, reviews
-and items directly multiplies rows and inflates revenue. `tests/test_sql_and_analytics.py` proves item revenue equals order revenue.
+**Star schema:** `fact_orders` (1 row / order), `fact_order_items` (/ item), `fact_payments` (/ payment), `fact_reviews` (/ review), and `dim_customer`, `dim_product`, `dim_seller`, `dim_date`, `dim_geography`. The facts are kept at separate grains because joining payments, reviews and items directly multiplies rows and inflates revenue. `tests/test_sql_and_analytics.py` proves item revenue equals order revenue.
 
 ## Database engine
+
 - **Default: DuckDB** (a file at `data/ecommerce.duckdb`, nothing to install). Its SQL dialect is PostgreSQL-compatible.
-- **PostgreSQL:** set `DATABASE_URL=postgresql+psycopg2://user:password@localhost:5432/ecommerce` and run the pipeline. The same SQL files build the
-  schemas, and `sql/constraints_postgres.sql` adds primary keys and indexes. *The test suite was run against DuckDB; the PostgreSQL path uses
-  standard SQL (`ROUND(CAST(... AS NUMERIC), 2)`, `FILTER`, `DATE_TRUNC`) but verify it on your server.*
+- **PostgreSQL:** set `DATABASE_URL=postgresql+psycopg2://user:password@localhost:5432/ecommerce` and run the pipeline. The same SQL files build the schemas, and `sql/constraints_postgres.sql` adds primary keys and indexes. *The test suite was run against DuckDB; the PostgreSQL path uses standard SQL (`ROUND(CAST(... AS NUMERIC), 2)`, `FILTER`, `DATE_TRUNC`) but verify it on your server.*
 
 ## Honest limitations (put these in your interview answers)
+
 - Olist has **no product cost, inventory, web session or cart data**, so profit, stock-out risk and cart abandonment are deliberately *not* computed.
 - Customers: 97% buy once, so RFM frequency uses business bins (1 / 2 / 3+ orders) instead of quintiles, which would split ties arbitrarily.
 - Forecast history is about 20 months: annual seasonality is learned from a single cycle. The app shows model error against baselines and the limitations.
@@ -87,13 +83,15 @@ and items directly multiplies rows and inflates revenue. `tests/test_sql_and_ana
 - A `.pbix` file cannot be generated outside Power BI Desktop. `powerbi/` contains everything to build it in about 90 minutes.
 
 ## How to talk about this project
+
 - *"I built a layered warehouse with a star schema and tested that joins don't inflate revenue."*
 - *"Forecasts are judged against naive baselines on a hold-out, with MAE/RMSE/MAPE and stated limitations."*
 - *"Every chart maps to a business question and a recommended action."* (see `reports/business_insights.md`)
 - *"I separated 'what the data shows' from 'what it cannot show' (profit, inventory, cart abandonment)."*
 
 ## Repository layout
-```
+
+```text
 app/            Streamlit front-end (streamlit_app.py, style.py)
 data/           raw/ (git-ignored), processed/ (outputs, powerbi/ CSVs)
 docs/           screenshots
@@ -107,4 +105,5 @@ run_pipeline.py One-command pipeline (flags: --real, --orders N, --regenerate, -
 ```
 
 ## Extending it
+
 Add queries to `sql/queries/*.sql` using the `-- name / -- title / -- question / -- level` header; they appear in the SQL Lab automatically.
